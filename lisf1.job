@@ -1,0 +1,30 @@
+#!/bin/sh
+#___INFO__MARK_BEGIN__
+##########################################################################
+#
+# script /H01_Fresh_Water/Lisflood_actualModel/Lisflood/lisf1.job
+# run in the Grid:  qsub lisf1.job 
+# What the script does: script.py settings
+#The grid settings use the UNIX storage path, instead of local windows PC folder "c:\....")
+#
+##########################################################################
+#___INFO__MARK_END__
+#$ -M adrian.trif@jrc.ec.europa.eu    
+#$ -m abe  
+#$ -o /H01_Fresh_Water/Europe/output/testgrid/tmp.out
+#$ -e /H01_Fresh_Water/Europe/output/testgrid/tmp.err
+
+export PATH=/software/PCRaster/pcraster4/bin:/software/pyhdfdeps/makedepf90-2.8.8:$PATH
+export PYTHONPATH=/software/PCRaster/pcraster4/python:$PYTHONPATH
+
+
+echo "Start - `date`"
+
+echo $PATH
+echo $PYTHONPATH
+python /H01_Fresh_Water/Lisflood_actualModel/Lisflood/lisf1.py /H01_Fresh_Water/Europe/LisfloodEurope/settingsEurope5kObs_GRID.xml
+
+echo "Finish - `date`"
+
+#$ -N Lisf1grid 
+#$ -S /bin/sh
